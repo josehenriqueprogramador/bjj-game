@@ -1,50 +1,47 @@
-# 🥋 BJJ Retro Manager - MVP
+# 🥋 BJJ Manager MVP - Edição Customizada
 
-Um simulador tático de Jiu-Jitsu brasileiro em estilo retro, desenvolvido com **Python** e **FastAPI**. O projeto transforma a estratégia do tatame em lógica de programação, simulando a gestão de posições, stamina e pontuações oficiais da IBJJF.
+Um simulador tático de Jiu-Jitsu Brasileiro (BJJ) desenvolvido com **Python** e **FastAPI**. Esta versão evoluiu de um simples simulador de texto para um jogo de estratégia interativo com gestão de nome, stamina e placar completo para ambos os lutadores.
 
+## 🌟 O que há de novo?
 
+- **Sistema de Identificação:** Tela de entrada para registro do nome do lutador, tornando a experiência personalizada.
+- **Mecânicas Técnicas Expandidas:** Inclusão de **Raspagens/Inversões**, permitindo jogar estrategicamente por baixo (guarda).
+- **Placar Real da IA:** Oponente reativo que agora pontua e aplica contra-ataques caso você falhe nos movimentos.
+- **Contagem de Vantagens:** Sistema de desempate fiel às regras da IBJJF (V: 0).
+- **Morte Súbita (Submission):** Opção de finalização com bônus de precisão se você estiver nas costas.
 
-## 🚀 Sobre o Projeto
+## 🛠️ Tecnologias e Conceitos Aplicados
 
-O **BJJ Retro Manager** não é apenas um sorteio de resultados. Ele é um motor de combate que exige que o jogador tome decisões baseadas na posição atual e no nível de energia do atleta. 
+- **Back-end:** FastAPI com rotas dinâmicas e manipulação de formulários (`python-multipart`).
+- **Frontend:** HTML5/CSS3 responsivo com interface que altera o brilho e cores conforme o domínio da luta (Feedback Visual).
+- **Lógica de Dados:** Gestão de estado global para persistência da stamina e pontuação durante o round.
+- **Deploy:** Configurado para **Render** com integração contínua via GitHub.
 
-### Funcionalidades Principais:
-- **Lógica de Posição:** O sistema reconhece onde a luta está (Em pé, Meia-Guarda, Cem Quilos, Costas) e só permite movimentos válidos para cada situação.
-- **Gestão de Stamina:** Cada tentativa de ataque consome energia. Atacar com stamina baixa reduz drasticamente as chances de sucesso.
-- **IA Defensiva:** O oponente reage de forma aleatória entre "Travar", "Explodir" ou "Antecipar", criando um desafio dinâmico.
-- **Regras Oficiais:** Sistema de pontuação fiel à realidade (Quedas: 2, Passagens: 3, Costas: 4).
+## 🎮 Como Funciona a Luta
 
-## 🛠️ Tecnologias Utilizadas
+1. **Entrada:** Digite seu nome para subir no tatame.
+2. **Estratégia de Posição:**
+   - **Em Pé:** Foque em **Quedas** (+2 pts).
+   - **Por Baixo:** Use **Raspagens** (+2 pts) para inverter e chegar por cima.
+   - **Por Cima:** Tente **Passar a Guarda** (+3 pts) ou **Pegar as Costas** (+4 pts).
+3. **Gestão de Energia:** Cada movimento consome Stamina. Se sua energia estiver abaixo de 40%, suas chances de sucesso diminuem drasticamente.
+4. **Finalização:** Tentar encerrar a luta a qualquer momento. Se falhar, você perde a posição e a luta volta em pé.
 
-- **Linguagem:** Python 3.x
-- **Framework Web:** FastAPI (Assíncrono)
-- **Servidor ASGI:** Uvicorn
-- **Interface:** HTML5/CSS3 com design responsivo focado em Mobile.
-- **Deploy & Infra:** Git, GitHub e Render.
+## 🚀 Instalação e Uso
 
-## 📁 Estrutura do Repositório
+### Pré-requisitos
+Certifique-se de ter o arquivo `requirements.txt` com as seguintes bibliotecas:
+- `fastapi`
+- `uvicorn`
+- `python-multipart`
 
-- `main.py`: Contém todo o motor de regras, as rotas da aplicação e a interface front-end.
-- `requirements.txt`: Lista de dependências para o ambiente de produção.
-
-## 🎮 Como Jogar
-
-1. **Início:** A luta começa em pé.
-2. **Estratégia:** Tente a queda para progredir. Uma vez no solo, você deve decidir entre tentar passar a guarda ou arriscar ir direto para as costas.
-3. **Atenção:** Observe a barra de Stamina. Se ela chegar a zero, seus movimentos raramente terão sucesso.
-4. **Feedback:** A interface muda de cor conforme o seu domínio na luta aumenta (Verde -> Azul -> Amarelo -> Vermelho).
-
-## 👷 Como Rodar Localmente (Termux ou PC)
-
+### Rodando Localmente (Termux ou PC)
 ```bash
-# Clone o repositório
+# Clone o projeto
 git clone [https://github.com/josehenriqueprogramador/bjj-game.git](https://github.com/josehenriqueprogramador/bjj-game.git)
-
-# Entre na pasta
-cd bjj-game
 
 # Instale as dependências
 pip install -r requirements.txt
 
 # Inicie o servidor
-uvicorn main:app --reload
+uvicorn main:app --host 0.0.0.0 --port 8000
